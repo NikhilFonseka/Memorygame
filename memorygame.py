@@ -10,27 +10,29 @@ def on_continue_click():
 
 root = Tk()
 root.title = "Memory Game"
-root.geometry("500x500")
-root.configure(bg="lightgreen")
+root.geometry("500x400")
+root.configure(bg="silver")
 
 
 
 
-frame1 = Frame(root,bg="lightgreen")
-frame1.pack()
-titlelabel = Label(frame1,text="Memory game",font=("Arial", 30,), fg="Yellow")
+frame1 = Frame(root, bg="silver")
+frame1.pack(expand=True,fill=BOTH)
+
+titlelabel = Label(frame1,text="Memory game",font=("helvetica", 30,"bold"), fg="white",bg="silver")
 titlelabel.pack()
 header = Label(frame1,text="Welcome to the memory game you will be shown a sequence of numbers, your job is to enter them in the order shown",
-    font=("Arial", 15,),
-    bg="green", 
-    fg="Yellow",
+    font=("helvetica", 12, "bold"),
+    bg="silver", 
+    fg="#778899",
+    
     wraplength=450
                )
 header.pack(pady=10)
 
-continue_button = Button(root, text="Continue", font=("Arial", 16), bg="lightblue", fg="black", command=on_continue_click, padx=10, pady=20)
+continue_button = Button(root, text="Continue", font=("helvetica", 16, "bold"), bg="lightblue", fg="black", command=on_continue_click, padx=20, pady=10)
 
-continue_button.pack(pady=170)
+continue_button.pack(pady=20)
 
 
 
