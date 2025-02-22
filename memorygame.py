@@ -47,7 +47,7 @@ def generate_number():
 
 
     show_number.config(text=f"{''.join(map(str, templist))}")
-    root.after(3400, hide)
+    root.after(300, hide)
 
 def check(event=None):
     global score
@@ -74,46 +74,62 @@ def on_continue_click():
     frame2.pack(expand=True, fill=BOTH)
 
 #hover effect
-def continue_button_hover(event):
+
+def cb(event):
     continue_button.config(bg="yellow", fg="black", font=("helvetica", 18, "bold"))
 #hover effect
-def no_continue_button_hover(event):
-    continue_button.config(bg="lightblue", fg="black", font=("helvetica", 16, "bold"))
+def ncb(event):
+    continue_button.config(fg="White",bg="Black", font=("helvetica", 16, "bold"))
+
+def gb(event):
+    generate_button.config(bg="yellow", fg="black", font=("helvetica", 18, "bold"))
+def ngb(event):
+    generate_button.config(fg="White",bg="Black", font=("helvetica", 16, "bold"))
+
+def sb(event):
+    submitbutton.config(bg="yellow", fg="black", font=("helvetica", 16, "bold"))
+def nsb(event):
+    submitbutton.config(fg="White",bg="Black", font=("helvetica", 16, "bold"))
+
+
+
 
 #to run application 
 root = Tk()
 root.title("Memory Game")
 root.geometry("500x400")
-root.configure(bg="silver")
+root.configure(bg="black")
 
 validate_cmd = root.register(validate_input)
 
 #creating frame 2
-frame2= Frame(root, bg="lightblue")
+frame2= Frame(root, bg="black")
 #frame 1 creation
-frame1 = Frame(root, bg="silver")
+frame1 = Frame(root, bg="black")
 frame1.pack(expand=True,fill=BOTH)
 
 #title head of text
-titlelabel = Label(frame1,text="Memory game",font=("helvetica", 30,"bold"), fg="white",bg="silver")
+titlelabel = Label(frame1,text="Memory game",font=("helvetica", 30,"bold"), fg="White",bg="Black")
 titlelabel.pack()
 
 #information tells user what the game is
 header = Label(frame1,text="Welcome to the memory game you will be shown a sequence of numbers, you have 5 seconds to remember it, and when the times runs out you have to type it into the box, Good Luck!",
-    font=("helvetica", 12, "bold"), bg="silver", fg="teal",wraplength=450)
+    font=("helvetica", 12, "bold"), bg="black", fg="teal",wraplength=450)
 header.pack(pady=30)
 
 #Continue button
-continue_button = Button(frame1, text="Start game", font=("helvetica", 16, "bold"), bg="lightblue", fg="black", command=on_continue_click, padx=20, pady=10,activebackground="white", activeforeground="black" )
-continue_button.bind("<Enter>",continue_button_hover)
-continue_button.bind("<Leave>",no_continue_button_hover)
+continue_button = Button(frame1, text="Start game", font=("helvetica", 16, "bold"), fg="White",bg="Black", command=on_continue_click, padx=20, pady=10,activebackground="white", activeforeground="black" )
+continue_button.bind("<Enter>",cb)
+continue_button.bind("<Leave>",ncb)
 continue_button.pack(side=BOTTOM, pady=20)
 
 #Frame 2
-header2 = Label(frame2,text="Are you ready?",font=("helvetica", 16, "bold",))
+header2 = Label(frame2,text="Are you ready?",font=("helvetica", 16, "bold",),fg="Red",bg="Black")
 header2.pack(side=TOP, pady=20)
 
-generate_button = Button(frame2,text="Generate random number", font=("helvetica", 16, "bold"), bg="white", fg="black", command=generate_number, padx=20, pady=10,activebackground="grey", activeforeground="black" )
+generate_button = Button(frame2,text="Generate random number", font=("helvetica", 16, "bold"), fg="White",bg="Black", command=generate_number, padx=20, pady=10,activebackground="grey", activeforeground="black" )
+generate_button.bind("<Enter>",gb)
+generate_button.bind("<Leave>",ngb)
 generate_button.pack(side=BOTTOM, pady=20)
 
 frame3 = Frame(root,bg="black")
@@ -123,6 +139,8 @@ show_number.pack(pady=100)
 
 User_Guess = Entry(frame3, font=("Arial", 20),validate="key",validatecommand=(validate_cmd, "%P") )
 submitbutton = Button(frame3,text="submit", font=("helvetica", 16, "bold"),fg="White",bg="Black", command=check)
+submitbutton.bind("<Enter>",sb)
+submitbutton.bind("<Leave>",nsb)
 
 User_Guess.bind("<Return>", check)
 
