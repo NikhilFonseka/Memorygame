@@ -164,7 +164,7 @@ score_label.pack(side=TOP, pady=10)
 go = Label(frame3, text="Game over", font=("helvetica", 25, "bold"), bg="black", fg="red")
 
 #generate button and hover effect
-generate_button1 = Button(frame3, text="Generate random number", font=("helvetica", 16, "bold"), fg="White", bg="Black", command=generate_number, padx=20, pady=10, activebackground="grey", activeforeground="black")
+generate_button1 = Button(frame3, text="Restart", font=("helvetica", 16, "bold"), fg="White", bg="Black", command=generate_number, padx=20, pady=10, activebackground="grey", activeforeground="black")
 generate_button1.bind("<Enter>",sgb)
 generate_button1.bind("<Leave>",nsgb)
 #end root/ tkinter 
