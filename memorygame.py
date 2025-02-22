@@ -1,11 +1,18 @@
 from tkinter import *
 import random as rand
+import time
 #variables for number generation
 templist=[]
 number = []
 num = None
 number_amount = 5
+def hide():
+    show_number.pack_forget()
+    submitbutton.pack(side=BOTTOM, pady=20)
+    User_Guess.pack(fill=X, side=BOTTOM, pady=20)
 
+
+    
 #to generate the random number
 def generate_number():
     global templist, number
@@ -18,7 +25,20 @@ def generate_number():
         templist.append(num)
     number.append(templist)
     print(number)
-    show_number.config(text=f"{' '.join(map(str, templist))}")
+    show_number.config(text=f"{''.join(map(str, templist))}")
+    root.after(1500, hide)
+
+def check():
+    guess = User_Guess.get()
+    real_num = ''.join(map(str, templist))
+    if guess == real_num:
+        print("working")
+    else:
+        print("broken")
+
+    
+    
+
 
 #click to go into the frame2
 def on_continue_click():
@@ -37,6 +57,7 @@ root = Tk()
 root.title("Memory Game")
 root.geometry("500x400")
 root.configure(bg="silver")
+
 #creating frame 2
 frame2= Frame(root, bg="lightblue")
 #frame 1 creation
@@ -66,9 +87,12 @@ generate_button = Button(frame2,text="Generate random number", font=("helvetica"
 generate_button.pack(side=BOTTOM, pady=20)
 
 frame3 = Frame(root,bg="lightblue")
+
 show_number = Label(frame3, text="",font=("helvetica", 25, "bold"),fg="White",bg="Black")
 show_number.pack(pady=100)
 
+User_Guess = Entry(frame3, font=("Arial", 20) )
+submitbutton = Button(frame3,text="submit", font=("helvetica", 16, "bold"), bg="lightblue", fg="black", command=check)
 root=mainloop()
 
 
