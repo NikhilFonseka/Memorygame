@@ -1,3 +1,4 @@
+#importing modules
 from tkinter import *
 import random as rand
 import time
@@ -7,7 +8,7 @@ templist=[]
 number = []
 num = None
 number_amount = 5
-
+#game is over you restart
 def game_over():
     global score
     submitbutton.pack_forget()
@@ -16,13 +17,13 @@ def game_over():
     score_label.pack(pady=100)
     score = 0
     generate_button.pack(side=BOTTOM, pady=20)
-
+#hides the number you can guess it
 def hide():
     show_number.pack_forget()
     submitbutton.pack(side=BOTTOM, pady=20)
     User_Guess.pack(fill=X, side=BOTTOM, pady=20)
 
-
+#if you guess correctly the game continues
 def continue_game():
     global number_amount
     User_Guess.delete(0, END)
@@ -42,28 +43,27 @@ def generate_number():
     for i in range(number_amount):
         num= rand.randint(1, 9)
         templist.append(num)
-
     number.append(templist)
-
-
     show_number.config(text=f"{''.join(map(str, templist))}")
     root.after(300, hide)
 
+#checs if your number was right
 def check(event=None):
     global score
     guess = User_Guess.get()
     real_num = ''.join(map(str, templist))
-    if guess == real_num:
+    if guess == real_num: # if you got it right
         print("working")
         score = score+1
         score_label.config(text=f"Score: {score}")
         continue_game()
         
         print(score)
-    else:
+
+    else:#if you got it wrong
         game_over()
         User_Guess.delete(0, END)
-
+#so that the user can only enter numbers into the entry
 def validate_input(new_text):
     return new_text.isdigit() or new_text == ""
         
@@ -73,19 +73,18 @@ def on_continue_click():
     frame1.pack_forget()  
     frame2.pack(expand=True, fill=BOTH)
 
-#hover effect
-
+#hover effect for buttons abvreviated
+#continue button on/off
 def cb(event):
     continue_button.config(bg="yellow", fg="black", font=("helvetica", 18, "bold"))
-#hover effect
 def ncb(event):
     continue_button.config(fg="White",bg="Black", font=("helvetica", 16, "bold"))
-
+#generate button on/off
 def gb(event):
     generate_button.config(bg="yellow", fg="black", font=("helvetica", 18, "bold"))
 def ngb(event):
     generate_button.config(fg="White",bg="Black", font=("helvetica", 16, "bold"))
-
+#submit button button on/off
 def sb(event):
     submitbutton.config(bg="yellow", fg="black", font=("helvetica", 16, "bold"))
 def nsb(event):
@@ -100,6 +99,7 @@ root.title("Memory Game")
 root.geometry("500x400")
 root.configure(bg="black")
 
+#for stopping user from entering anything other than a number
 validate_cmd = root.register(validate_input)
 
 #creating frame 2
@@ -127,29 +127,34 @@ continue_button.pack(side=BOTTOM, pady=20)
 header2 = Label(frame2,text="Are you ready?",font=("helvetica", 16, "bold",),fg="Red",bg="Black")
 header2.pack(side=TOP, pady=20)
 
+#this button generates the randon number
 generate_button = Button(frame2,text="Generate random number", font=("helvetica", 16, "bold"), fg="White",bg="Black", command=generate_number, padx=20, pady=10,activebackground="grey", activeforeground="black" )
 generate_button.bind("<Enter>",gb)
 generate_button.bind("<Leave>",ngb)
 generate_button.pack(side=BOTTOM, pady=20)
 
+#frame 3
 frame3 = Frame(root,bg="black")
 
+#this shows you the number so you can remember it
 show_number = Label(frame3, text="",font=("helvetica", 30, "bold"),fg="White",bg="Black")
 show_number.pack(pady=100)
 
+#this is where the user guess it 
 User_Guess = Entry(frame3, font=("Arial", 20),validate="key",validatecommand=(validate_cmd, "%P") )
+#they can either click this or eneter
 submitbutton = Button(frame3,text="submit", font=("helvetica", 16, "bold"),fg="White",bg="Black", command=check)
 submitbutton.bind("<Enter>",sb)
 submitbutton.bind("<Leave>",nsb)
-
+#press eneter to guess
 User_Guess.bind("<Return>", check)
-
+#score of the user
 score_label = Label(frame3, text=f"Score: {score}", font=("helvetica", 16, "bold"),fg="White",bg="Black")
 score_label.pack(side=TOP, pady=10)
-
+#abvreviated game over
 go = Label(frame3, text="Game over", font=("helvetica", 25, "bold"), bg="white", fg="black")
 
-
+#end root/ tkinter 
 root=mainloop()
 
 
