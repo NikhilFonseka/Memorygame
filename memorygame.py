@@ -7,6 +7,16 @@ templist=[]
 number = []
 num = None
 number_amount = 5
+
+def game_over():
+    global score
+    submitbutton.pack_forget()
+    User_Guess.pack_forget()
+    go.pack(pady=100)
+    score_label.pack(pady=100)
+    score = 0
+    generate_button.pack(side=BOTTOM, pady=20)
+
 def hide():
     show_number.pack_forget()
     submitbutton.pack(side=BOTTOM, pady=20)
@@ -37,7 +47,7 @@ def generate_number():
 
 
     show_number.config(text=f"{''.join(map(str, templist))}")
-    root.after(4000, hide)
+    root.after(3400, hide)
 
 def check(event=None):
     global score
@@ -51,8 +61,12 @@ def check(event=None):
         
         print(score)
     else:
+        game_over()
         User_Guess.delete(0, END)
-        print("broken")
+
+def validate_input(new_text):
+    return new_text.isdigit() or new_text == ""
+        
 
 #click to go into the frame2
 def on_continue_click():
@@ -71,6 +85,8 @@ root = Tk()
 root.title("Memory Game")
 root.geometry("500x400")
 root.configure(bg="silver")
+
+validate_cmd = root.register(validate_input)
 
 #creating frame 2
 frame2= Frame(root, bg="lightblue")
@@ -100,18 +116,21 @@ header2.pack(side=TOP, pady=20)
 generate_button = Button(frame2,text="Generate random number", font=("helvetica", 16, "bold"), bg="white", fg="black", command=generate_number, padx=20, pady=10,activebackground="grey", activeforeground="black" )
 generate_button.pack(side=BOTTOM, pady=20)
 
-frame3 = Frame(root,bg="lightblue")
+frame3 = Frame(root,bg="black")
 
-show_number = Label(frame3, text="",font=("helvetica", 25, "bold"),fg="White",bg="Black")
+show_number = Label(frame3, text="",font=("helvetica", 30, "bold"),fg="White",bg="Black")
 show_number.pack(pady=100)
 
-User_Guess = Entry(frame3, font=("Arial", 20) )
-submitbutton = Button(frame3,text="submit", font=("helvetica", 16, "bold"), bg="lightblue", fg="black", command=check)
+User_Guess = Entry(frame3, font=("Arial", 20),validate="key",validatecommand=(validate_cmd, "%P") )
+submitbutton = Button(frame3,text="submit", font=("helvetica", 16, "bold"),fg="White",bg="Black", command=check)
 
 User_Guess.bind("<Return>", check)
 
-score_label = Label(frame3, text=f"Score: {score}", font=("helvetica", 16, "bold"), bg="lightblue")
+score_label = Label(frame3, text=f"Score: {score}", font=("helvetica", 16, "bold"),fg="White",bg="Black")
 score_label.pack(side=TOP, pady=10)
+
+go = Label(frame3, text="Game over", font=("helvetica", 25, "bold"), bg="white", fg="black")
+
 
 root=mainloop()
 
