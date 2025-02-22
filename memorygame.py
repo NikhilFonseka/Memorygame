@@ -2,6 +2,7 @@ from tkinter import *
 import random as rand
 import time
 #variables for number generation
+score = 0
 templist=[]
 number = []
 num = None
@@ -12,7 +13,15 @@ def hide():
     User_Guess.pack(fill=X, side=BOTTOM, pady=20)
 
 
-    
+def continue_game():
+    global number_amount
+    User_Guess.delete(0, END)
+    number_amount = number_amount+1
+    submitbutton.pack_forget()
+    User_Guess.pack_forget()
+    show_number.pack(pady=100)
+    generate_number()
+
 #to generate the random number
 def generate_number():
     global templist, number
@@ -23,22 +32,27 @@ def generate_number():
     for i in range(number_amount):
         num= rand.randint(1, 9)
         templist.append(num)
-    number.append(templist)
-    print(number)
-    show_number.config(text=f"{''.join(map(str, templist))}")
-    root.after(1500, hide)
 
-def check():
+    number.append(templist)
+
+
+    show_number.config(text=f"{''.join(map(str, templist))}")
+    root.after(4000, hide)
+
+def check(event=None):
+    global score
     guess = User_Guess.get()
     real_num = ''.join(map(str, templist))
     if guess == real_num:
         print("working")
+        score = score+1
+        score_label.config(text=f"Score: {score}")
+        continue_game()
+        
+        print(score)
     else:
+        User_Guess.delete(0, END)
         print("broken")
-
-    
-    
-
 
 #click to go into the frame2
 def on_continue_click():
@@ -93,6 +107,12 @@ show_number.pack(pady=100)
 
 User_Guess = Entry(frame3, font=("Arial", 20) )
 submitbutton = Button(frame3,text="submit", font=("helvetica", 16, "bold"), bg="lightblue", fg="black", command=check)
+
+User_Guess.bind("<Return>", check)
+
+score_label = Label(frame3, text=f"Score: {score}", font=("helvetica", 16, "bold"), bg="lightblue")
+score_label.pack(side=TOP, pady=10)
+
 root=mainloop()
 
 
