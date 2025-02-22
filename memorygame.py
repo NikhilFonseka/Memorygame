@@ -10,13 +10,15 @@ num = None
 number_amount = 5
 #game is over you restart
 def game_over():
-    global score
+    global score, number_amount
     submitbutton.pack_forget()
     User_Guess.pack_forget()
     go.pack(pady=100)
-    score_label.pack(pady=100)
+    score_label.pack()
     score = 0
-    generate_button.pack(side=BOTTOM, pady=20)
+    generate_button1.pack()
+    number_amount = 5
+
 #hides the number you can guess it
 def hide():
     show_number.pack_forget()
@@ -35,6 +37,8 @@ def continue_game():
 
 #to generate the random number
 def generate_number():
+    generate_button1.pack_forget()
+    go.pack_forget()
     global templist, number
     frame2.pack_forget()  
     frame3.pack(expand=True, fill=BOTH)
@@ -45,6 +49,7 @@ def generate_number():
         templist.append(num)
     number.append(templist)
     show_number.config(text=f"{''.join(map(str, templist))}")
+    show_number.pack(pady=100)
     root.after(3000, hide)
 
 #checs if your number was right
@@ -61,8 +66,8 @@ def check(event=None):
         print(score)
 
     else:#if you got it wrong
-        game_over()
         User_Guess.delete(0, END)
+        game_over()
 #so that the user can only enter numbers into the entry
 def validate_input(new_text):
     return new_text.isdigit() or new_text == ""
@@ -89,6 +94,11 @@ def sb(event):
     submitbutton.config(bg="yellow", fg="black", font=("helvetica", 16, "bold"))
 def nsb(event):
     submitbutton.config(fg="White",bg="Black", font=("helvetica", 16, "bold"))
+#generate button for game over hover effect
+def sgb(event):
+    generate_button1.config(bg="yellow", fg="black", font=("helvetica", 16, "bold"))
+def nsgb(event):
+    generate_button1.config(fg="White",bg="Black", font=("helvetica", 16, "bold"))
 
 
 
@@ -138,7 +148,6 @@ frame3 = Frame(root,bg="black")
 
 #this shows you the number so you can remember it
 show_number = Label(frame3, text="",font=("helvetica", 30, "bold"),fg="White",bg="Black")
-show_number.pack(pady=100)
 
 #this is where the user guess it 
 User_Guess = Entry(frame3, font=("Arial", 20),validate="key",validatecommand=(validate_cmd, "%P") )
@@ -152,8 +161,11 @@ User_Guess.bind("<Return>", check)
 score_label = Label(frame3, text=f"Score: {score}", font=("helvetica", 16, "bold"),fg="White",bg="Black")
 score_label.pack(side=TOP, pady=10)
 #abvreviated game over
-go = Label(frame3, text="Game over", font=("helvetica", 25, "bold"), bg="white", fg="black")
+go = Label(frame3, text="Game over", font=("helvetica", 25, "bold"), bg="black", fg="red")
 
+generate_button1 = Button(frame3, text="Generate random number", font=("helvetica", 16, "bold"), fg="White", bg="Black", command=generate_number, padx=20, pady=10, activebackground="grey", activeforeground="black")
+generate_button1.bind("<Enter>",sgb)
+generate_button1.bind("<Leave>",nsgb)
 #end root/ tkinter 
 root=mainloop()
 
