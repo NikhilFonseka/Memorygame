@@ -45,7 +45,7 @@ def generate_number():
         templist.append(num)
     number.append(templist)
     show_number.config(text=f"{''.join(map(str, templist))}")
-    root.after(300, hide)
+    root.after(3000, hide)
 
 #checs if your number was right
 def check(event=None):
