@@ -147,7 +147,7 @@ generate_button.pack(side=BOTTOM, pady=20)
 frame3 = Frame(root,bg="black")
 
 #this shows you the number so you can remember it
-show_number = Label(frame3, text="",font=("helvetica", 30, "bold"),fg="White",bg="Black")
+show_number = Label(frame3, text="",font=("helvetica", 30, "bold"),fg="#39FF14",bg="Black")
 
 #this is where the user guess it 
 User_Guess = Entry(frame3, font=("Arial", 20),validate="key",validatecommand=(validate_cmd, "%P") )
@@ -163,6 +163,7 @@ score_label.pack(side=TOP, pady=10)
 #abvreviated game over
 go = Label(frame3, text="Game over", font=("helvetica", 25, "bold"), bg="black", fg="red")
 
+#generate button and hover effect
 generate_button1 = Button(frame3, text="Generate random number", font=("helvetica", 16, "bold"), fg="White", bg="Black", command=generate_number, padx=20, pady=10, activebackground="grey", activeforeground="black")
 generate_button1.bind("<Enter>",sgb)
 generate_button1.bind("<Leave>",nsgb)
