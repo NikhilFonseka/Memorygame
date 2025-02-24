@@ -119,13 +119,13 @@ frame1 = Frame(root, bg="black")
 frame1.pack(expand=True,fill=BOTH)
 
 #title head of text
-titlelabel = Label(frame1,text="Memory game",font=("helvetica", 30,"bold"), fg="White",bg="Black")
-titlelabel.pack()
+titlelabel = Label(frame1,text="Memory game",font=("helvetica", 45,"bold"), fg="White",bg="Black")
+titlelabel.pack(pady=10)
 
 #information tells user what the game is
 header = Label(frame1,text="Welcome to the memory game you will be shown a sequence of numbers, you have 5 seconds to remember it, and when the times runs out you have to type it into the box, Good Luck!",
     font=("helvetica", 12, "bold"), bg="black", fg="teal",wraplength=450)
-header.pack(pady=30)
+#header.pack(pady=30)
 
 #Continue button
 continue_button = Button(frame1, text="Start game", font=("helvetica", 16, "bold"), fg="White",bg="Gold", command=on_continue_click, padx=20, pady=10,activebackground="white", activeforeground="black" )
@@ -167,6 +167,8 @@ go = Label(frame3, text="Game over", font=("helvetica", 25, "bold"), bg="black",
 generate_button1 = Button(frame3, text="Restart", font=("helvetica", 16, "bold"), fg="White", bg="Gold", command=generate_number, padx=20, pady=10, activebackground="grey", activeforeground="black")
 generate_button1.bind("<Enter>",sgb)
 generate_button1.bind("<Leave>",nsgb)
+
+
 #end root/ tkinter 
 root=mainloop()
 
