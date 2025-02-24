@@ -134,7 +134,7 @@ continue_button.bind("<Leave>",ncb)
 continue_button.pack(side=BOTTOM, pady=20)
 
 #Frame 2
-header2 = Label(frame2,text="Are you ready?",font=("helvetica", 16, "bold",),fg="Red",bg="Black")
+header2 = Label(frame2,text="Are you ready?",font=("helvetica", 26, "bold",),fg="Red",bg="Black")
 header2.pack(side=TOP, pady=20)
 
 #this button generates the randon number
