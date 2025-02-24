@@ -156,8 +156,8 @@ header2.pack(side=TOP, pady=20)
 header = Label(frame2,text="Welcome to the memory game you will be shown a sequence of numbers, you have 5 seconds to remember it, and when the times runs out you have to type it into the box, Good Luck!",
     font=("helvetica", 12, "bold"), bg="black", fg="teal",wraplength=450)
 header.pack(pady=30)
-reward = Label(frame2,text="See what happens when you reach 9...",
-    font=("helvetica", 12, "bold"), bg="black", fg="darkgreen",)
+reward = Label(frame2,text="First person to reach 9 Wins, dont miss out on secret reward",
+    font=("helvetica", 10, "bold"), bg="black", fg="darkgreen", wraplength=450)
 reward.pack()
 #this button generates the randon number
 generate_button = Button(frame2,text="Generate random number", font=("helvetica", 16, "bold"), fg="White",bg="Gold", command=generate_number, padx=20, pady=10,activebackground="grey", activeforeground="black" )
