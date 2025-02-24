@@ -60,7 +60,15 @@ def generate_number():
     number.append(templist)
     show_number.config(text=f"{''.join(map(str, templist))}")
     show_number.pack(pady=100)
-    root.after(3000, hide)
+    if score >= 3:
+        root.after(5000, hide)
+    elif score >= 2:
+        root.after(4000, hide)
+    elif score >= 1:
+        root.after(3200, hide)
+    else:
+        root.after(2200, hide)
+
 
 #checs if your number was right
 def check(event=None):
