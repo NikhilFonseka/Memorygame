@@ -61,7 +61,7 @@ def generate_number():
     show_number.config(text=f"{''.join(map(str, templist))}")
     show_number.pack(pady=100)
     if score >= 3:
-        root.after(5000, hide)
+        root.after(6000, hide)
     elif score >= 2:
         root.after(4000, hide)
     elif score >= 1:
@@ -141,8 +141,6 @@ titlelabel = Label(frame1,text="Memory game",font=("helvetica", 45,"bold"), fg="
 titlelabel.pack(pady=10)
 
 #information tells user what the game is
-header = Label(frame2,text="Welcome to the memory game you will be shown a sequence of numbers, you have 5 seconds to remember it, and when the times runs out you have to type it into the box, Good Luck!",
-    font=("helvetica", 12, "bold"), bg="black", fg="teal",wraplength=450)
 Author = Label(frame1,text="By Nikhil",
     font=("helvetica", 16, "bold"), bg="black", fg="white",wraplength=450)
 Author.pack(pady=30)
@@ -155,8 +153,12 @@ continue_button.pack(side=BOTTOM, pady=20)
 #Frame 2
 header2 = Label(frame2,text="Are you ready?",font=("helvetica", 26, "bold",),fg="Red",bg="Black")
 header2.pack(side=TOP, pady=20)
+header = Label(frame2,text="Welcome to the memory game you will be shown a sequence of numbers, you have 5 seconds to remember it, and when the times runs out you have to type it into the box, Good Luck!",
+    font=("helvetica", 12, "bold"), bg="black", fg="teal",wraplength=450)
 header.pack(pady=30)
-
+reward = Label(frame2,text="See what happens when you reach 9...",
+    font=("helvetica", 12, "bold"), bg="black", fg="darkgreen",)
+reward.pack()
 #this button generates the randon number
 generate_button = Button(frame2,text="Generate random number", font=("helvetica", 16, "bold"), fg="White",bg="Gold", command=generate_number, padx=20, pady=10,activebackground="grey", activeforeground="black" )
 generate_button.bind("<Enter>",gb)
