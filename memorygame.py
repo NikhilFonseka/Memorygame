@@ -181,9 +181,9 @@ submitbutton.bind("<Leave>",nsb)
 User_Guess.bind("<Return>", check)
 #score of the user
 score_label = Label(frame3, text=f"Score: {score}", font=("helvetica", 16, "bold"),fg="White",bg="Black")
-highscore_label = Label(frame3, text=f"High Score: {highscore}", font=("helvetica", 16, "bold"),fg="White",bg="Black")
-score_label.pack(side=TOP, pady=10)
+highscore_label = Label(frame3, text=f"High Score: {highscore}", font=("helvetica", 24, "bold"),fg="gold",bg="Black")
 highscore_label.pack(side=TOP, pady=10)
+score_label.pack(side=TOP, pady=10)
 #abvreviated game over
 go = Label(frame3, text="Game over", font=("helvetica", 25, "bold"), bg="black", fg="red")
 
