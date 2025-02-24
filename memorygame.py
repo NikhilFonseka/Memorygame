@@ -4,6 +4,7 @@ import random as rand
 import time
 #variables for number generation
 score = 0
+highscore = 0
 templist=[]
 number = []
 num = None
@@ -13,7 +14,7 @@ def game_over():
     global score, number_amount
     submitbutton.pack_forget()
     User_Guess.pack_forget()
-    go.pack(pady=100)
+    go.pack(pady=90)
     score_label.pack()
     score = 0
     generate_button1.pack()
@@ -37,6 +38,15 @@ def continue_game():
 
 #to generate the random number
 def generate_number():
+    score_label.config(text=f"Score: {score}")
+    global highscore
+    if score > highscore:
+        highscore=score
+        highscore_label.config(text=f"HighScore: {highscore}")
+
+    else:
+        pass
+
     generate_button1.pack_forget()
     go.pack_forget()
     global templist, number
@@ -119,14 +129,15 @@ frame1 = Frame(root, bg="black")
 frame1.pack(expand=True,fill=BOTH)
 
 #title head of text
-titlelabel = Label(frame1,text="Memory game",font=("helvetica", 45,"bold"), fg="White",bg="Black")
+titlelabel = Label(frame1,text="Memory game",font=("helvetica", 45,"bold"), fg="Orange",bg="Black")
 titlelabel.pack(pady=10)
 
 #information tells user what the game is
-header = Label(frame1,text="Welcome to the memory game you will be shown a sequence of numbers, you have 5 seconds to remember it, and when the times runs out you have to type it into the box, Good Luck!",
+header = Label(frame2,text="Welcome to the memory game you will be shown a sequence of numbers, you have 5 seconds to remember it, and when the times runs out you have to type it into the box, Good Luck!",
     font=("helvetica", 12, "bold"), bg="black", fg="teal",wraplength=450)
-#header.pack(pady=30)
-
+Author = Label(frame1,text="By Nikhil",
+    font=("helvetica", 16, "bold"), bg="black", fg="white",wraplength=450)
+Author.pack(pady=30)
 #Continue button
 continue_button = Button(frame1, text="Start game", font=("helvetica", 16, "bold"), fg="White",bg="Gold", command=on_continue_click, padx=20, pady=10,activebackground="white", activeforeground="black" )
 continue_button.bind("<Enter>",cb)
@@ -136,6 +147,7 @@ continue_button.pack(side=BOTTOM, pady=20)
 #Frame 2
 header2 = Label(frame2,text="Are you ready?",font=("helvetica", 26, "bold",),fg="Red",bg="Black")
 header2.pack(side=TOP, pady=20)
+header.pack(pady=30)
 
 #this button generates the randon number
 generate_button = Button(frame2,text="Generate random number", font=("helvetica", 16, "bold"), fg="White",bg="Gold", command=generate_number, padx=20, pady=10,activebackground="grey", activeforeground="black" )
@@ -159,7 +171,9 @@ submitbutton.bind("<Leave>",nsb)
 User_Guess.bind("<Return>", check)
 #score of the user
 score_label = Label(frame3, text=f"Score: {score}", font=("helvetica", 16, "bold"),fg="White",bg="Black")
+highscore_label = Label(frame3, text=f"High Score: {highscore}", font=("helvetica", 16, "bold"),fg="White",bg="Black")
 score_label.pack(side=TOP, pady=10)
+highscore_label.pack(side=TOP, pady=10)
 #abvreviated game over
 go = Label(frame3, text="Game over", font=("helvetica", 25, "bold"), bg="black", fg="red")
 
@@ -167,7 +181,6 @@ go = Label(frame3, text="Game over", font=("helvetica", 25, "bold"), bg="black",
 generate_button1 = Button(frame3, text="Restart", font=("helvetica", 16, "bold"), fg="White", bg="Gold", command=generate_number, padx=20, pady=10, activebackground="grey", activeforeground="black")
 generate_button1.bind("<Enter>",sgb)
 generate_button1.bind("<Leave>",nsgb)
-
 
 #end root/ tkinter 
 root=mainloop()
