@@ -83,22 +83,22 @@ def on_continue_click():
 def cb(event):
     continue_button.config(bg="yellow", fg="black", font=("helvetica", 18, "bold"))
 def ncb(event):
-    continue_button.config(fg="White",bg="Black", font=("helvetica", 16, "bold"))
+    continue_button.config(fg="White",bg="gold", font=("helvetica", 16, "bold"))
 #generate button on/off
 def gb(event):
     generate_button.config(bg="yellow", fg="black", font=("helvetica", 18, "bold"))
 def ngb(event):
-    generate_button.config(fg="White",bg="Black", font=("helvetica", 16, "bold"))
+    generate_button.config(fg="White",bg="gold", font=("helvetica", 16, "bold"))
 #submit button button on/off
 def sb(event):
     submitbutton.config(bg="yellow", fg="black", font=("helvetica", 16, "bold"))
 def nsb(event):
-    submitbutton.config(fg="White",bg="Black", font=("helvetica", 16, "bold"))
+    submitbutton.config(fg="White",bg="gold", font=("helvetica", 16, "bold"))
 #generate button for game over hover effect
 def sgb(event):
     generate_button1.config(bg="yellow", fg="black", font=("helvetica", 16, "bold"))
 def nsgb(event):
-    generate_button1.config(fg="White",bg="Black", font=("helvetica", 16, "bold"))
+    generate_button1.config(fg="White",bg="gold", font=("helvetica", 16, "bold"))
 
 
 
@@ -128,7 +128,7 @@ header = Label(frame1,text="Welcome to the memory game you will be shown a seque
 header.pack(pady=30)
 
 #Continue button
-continue_button = Button(frame1, text="Start game", font=("helvetica", 16, "bold"), fg="White",bg="Black", command=on_continue_click, padx=20, pady=10,activebackground="white", activeforeground="black" )
+continue_button = Button(frame1, text="Start game", font=("helvetica", 16, "bold"), fg="White",bg="Gold", command=on_continue_click, padx=20, pady=10,activebackground="white", activeforeground="black" )
 continue_button.bind("<Enter>",cb)
 continue_button.bind("<Leave>",ncb)
 continue_button.pack(side=BOTTOM, pady=20)
@@ -138,7 +138,7 @@ header2 = Label(frame2,text="Are you ready?",font=("helvetica", 26, "bold",),fg=
 header2.pack(side=TOP, pady=20)
 
 #this button generates the randon number
-generate_button = Button(frame2,text="Generate random number", font=("helvetica", 16, "bold"), fg="White",bg="Black", command=generate_number, padx=20, pady=10,activebackground="grey", activeforeground="black" )
+generate_button = Button(frame2,text="Generate random number", font=("helvetica", 16, "bold"), fg="White",bg="Gold", command=generate_number, padx=20, pady=10,activebackground="grey", activeforeground="black" )
 generate_button.bind("<Enter>",gb)
 generate_button.bind("<Leave>",ngb)
 generate_button.pack(side=BOTTOM, pady=20)
@@ -152,7 +152,7 @@ show_number = Label(frame3, text="",font=("helvetica", 30, "bold"),fg="#39FF14",
 #this is where the user guess it 
 User_Guess = Entry(frame3, font=("Arial", 20),validate="key",validatecommand=(validate_cmd, "%P") )
 #they can either click this or eneter
-submitbutton = Button(frame3,text="submit", font=("helvetica", 16, "bold"),fg="White",bg="Black", command=check)
+submitbutton = Button(frame3,text="submit", font=("helvetica", 16, "bold"),fg="White",bg="Gold", command=check)
 submitbutton.bind("<Enter>",sb)
 submitbutton.bind("<Leave>",nsb)
 #press eneter to guess
@@ -164,7 +164,7 @@ score_label.pack(side=TOP, pady=10)
 go = Label(frame3, text="Game over", font=("helvetica", 25, "bold"), bg="black", fg="red")
 
 #generate button and hover effect
-generate_button1 = Button(frame3, text="Restart", font=("helvetica", 16, "bold"), fg="White", bg="Black", command=generate_number, padx=20, pady=10, activebackground="grey", activeforeground="black")
+generate_button1 = Button(frame3, text="Restart", font=("helvetica", 16, "bold"), fg="White", bg="Gold", command=generate_number, padx=20, pady=10, activebackground="grey", activeforeground="black")
 generate_button1.bind("<Enter>",sgb)
 generate_button1.bind("<Leave>",nsgb)
 #end root/ tkinter 
