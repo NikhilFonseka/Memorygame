@@ -2,6 +2,9 @@
 from tkinter import *
 import random as rand
 import time
+import csv
+
+
 #variables for number generation
 score = 0
 highscore = 0
@@ -9,9 +12,17 @@ templist=[]
 number = []
 num = None
 number_amount = 5
+with open('excelence.csv', mode='a') as excelence:
+    write = csv.writer(excelence)
+    write.writerow(["Gameover_answers"])
+global user_guess
+def save_to_csv(user_guess, templist):
+    with open('excelence.csv', mode='a') as excelence:
+        answer = csv.writer(excelence)
+        answer.writerow([user_guess, templist])
 #game is over you restart
 def game_over():
-    global score, number_amount
+    global score, templist, user_guess
     submitbutton.pack_forget()
     User_Guess.pack_forget()
     go.pack(pady=90)
@@ -19,6 +30,9 @@ def game_over():
     score = 0
     generate_button1.pack()
     number_amount = 5
+    user_guess = User_Guess.get()
+    templist = ''.join(map(str, templist))
+    save_to_csv(user_guess, templist)
 
 #hides the number you can guess it
 def hide():
