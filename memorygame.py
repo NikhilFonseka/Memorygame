@@ -12,17 +12,18 @@ templist=[]
 number = []
 num = None
 number_amount = 5
-with open('excelence.csv', mode='a') as excelence:
-    write = csv.writer(excelence)
-    write.writerow(["Gameover_answers"])
+with open('excelence.csv', mode='w') as excel:
+
+    write = csv.writer(excel)
+    write.writerow(["Answer"])
 global user_guess
-def save_to_csv(user_guess, templist):
+def save_to_csv(templist):
     with open('excelence.csv', mode='a') as excelence:
         answer = csv.writer(excelence)
-        answer.writerow([user_guess, templist])
+        answer.writerow([templist])
 #game is over you restart
 def game_over():
-    global score, templist, user_guess
+    global score, templist, user_guess, number_amount
     submitbutton.pack_forget()
     User_Guess.pack_forget()
     go.pack(pady=90)
@@ -32,7 +33,7 @@ def game_over():
     number_amount = 5
     user_guess = User_Guess.get()
     templist = ''.join(map(str, templist))
-    save_to_csv(user_guess, templist)
+    save_to_csv(templist)
 
 #hides the number you can guess it
 def hide():
