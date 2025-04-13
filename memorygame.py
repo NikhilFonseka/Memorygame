@@ -21,7 +21,7 @@ def save_to_csv(templist):
     with open('excelence.csv', mode='a') as excelence:
         answer = csv.writer(excelence)
         answer.writerow([templist])
-    print(templist)
+
 #game is over you restart
 def game_over():
     global score, templist, user_guess, number_amount
@@ -112,7 +112,7 @@ def on_continue_click():
     frame1.pack_forget()  
     frame2.pack(expand=True, fill=BOTH)
 
-#hover effect for buttons abvreviated
+#hover effect for buttons 
 #continue button on/off
 def cb(event):
     continue_button.config(bg="yellow", fg="black", font=("helvetica", 18, "bold"))
@@ -200,7 +200,7 @@ score_label = Label(frame3, text=f"Score: {score}", font=("helvetica", 16, "bold
 highscore_label = Label(frame3, text=f"High Score: {highscore}", font=("helvetica", 24, "bold"),fg="gold",bg="Black")
 highscore_label.pack(side=TOP, pady=10)
 score_label.pack(side=TOP, pady=10)
-#abvreviated game over
+#game over
 go = Label(frame3, text="Game over", font=("helvetica", 25, "bold"), bg="black", fg="red")
 
 #generate button and hover effect
