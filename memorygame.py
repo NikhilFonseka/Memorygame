@@ -23,14 +23,6 @@ def save_to_csv(templist):
         answer.writerow([templist])
     print(templist)
 #game is over you restart
-
-def hide():
-    show_number.pack_forget()
-    User_Guess.config(state="normal")  
-    User_Guess.delete(0, END)      
-    submitbutton.pack(side=BOTTOM, pady=20)
-    User_Guess.pack(fill=X, side=BOTTOM, pady=20)
-
 def game_over():
     global score, templist, user_guess, number_amount
     submitbutton.pack_forget()
@@ -44,6 +36,13 @@ def game_over():
     templist = ''.join(map(str, templist))
     save_to_csv(templist)
 
+#hides the number you can guess it
+def hide():
+    show_number.pack_forget()
+    User_Guess.config(state="normal")  # Re-enable the Entry
+    User_Guess.delete(0, END)         # Clear previous input
+    submitbutton.pack(side=BOTTOM, pady=20)
+    User_Guess.pack(fill=X, side=BOTTOM, pady=20)
 
 #if you guess correctly the game continues
 def continue_game():
