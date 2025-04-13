@@ -21,7 +21,16 @@ def save_to_csv(templist):
     with open('excelence.csv', mode='a') as excelence:
         answer = csv.writer(excelence)
         answer.writerow([templist])
+    print(templist)
 #game is over you restart
+
+def hide():
+    show_number.pack_forget()
+    User_Guess.config(state="normal")  
+    User_Guess.delete(0, END)      
+    submitbutton.pack(side=BOTTOM, pady=20)
+    User_Guess.pack(fill=X, side=BOTTOM, pady=20)
+
 def game_over():
     global score, templist, user_guess, number_amount
     submitbutton.pack_forget()
@@ -35,17 +44,13 @@ def game_over():
     templist = ''.join(map(str, templist))
     save_to_csv(templist)
 
-#hides the number you can guess it
-def hide():
-    show_number.pack_forget()
-    submitbutton.pack(side=BOTTOM, pady=20)
-    User_Guess.pack(fill=X, side=BOTTOM, pady=20)
 
 #if you guess correctly the game continues
 def continue_game():
     global number_amount
     User_Guess.delete(0, END)
-    number_amount = number_amount+1
+    User_Guess.config(state="disabled") 
+    number_amount = number_amount + 1
     submitbutton.pack_forget()
     User_Guess.pack_forget()
     show_number.pack(pady=100)
@@ -53,24 +58,23 @@ def continue_game():
 
 #to generate the random number
 def generate_number():
+    global score
     score_label.config(text=f"Score: {score}")
     global highscore
     if score > highscore:
-        highscore=score
+        highscore = score
         highscore_label.config(text=f"HighScore: {highscore}")
-
-    else:
-        pass
 
     generate_button1.pack_forget()
     go.pack_forget()
     global templist, number
     frame2.pack_forget()  
     frame3.pack(expand=True, fill=BOTH)
-    templist=[]
+    User_Guess.config(state="disabled")  # Disable the Entry
+    templist = []
     number = []
     for i in range(number_amount):
-        num= rand.randint(1, 9)
+        num = rand.randint(1, 9)
         templist.append(num)
     number.append(templist)
     show_number.config(text=f"{''.join(map(str, templist))}")
@@ -90,13 +94,11 @@ def check(event=None):
     global score
     guess = User_Guess.get()
     real_num = ''.join(map(str, templist))
-    if guess == real_num: # if you got it right
-        print("working")
+    if guess == real_num: 
         score = score+1
         score_label.config(text=f"Score: {score}")
         continue_game()
-        
-        print(score)
+
 
     else:#if you got it wrong
         User_Guess.delete(0, END)
