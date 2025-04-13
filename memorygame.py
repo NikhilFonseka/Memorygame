@@ -36,11 +36,20 @@ def game_over():
     templist = ''.join(map(str, templist))
     save_to_csv(templist)
 
+#bug fix user submit before number is visible
+def submit_button_on():
+        User_Guess.bind('<Return>', check)
+        submitbutton.config(command=check)
+def submit_button_off():
+        User_Guess.unbind('<Return>')
+        submitbutton.config(command=lambda: None)
+
 #hides the number you can guess it
 def hide():
+    submit_button_on()
     show_number.pack_forget()
-    User_Guess.config(state="normal")  # Re-enable the Entry
-    User_Guess.delete(0, END)         # Clear previous input
+    User_Guess.config(state="normal")  
+    User_Guess.delete(0, END)         
     submitbutton.pack(side=BOTTOM, pady=20)
     User_Guess.pack(fill=X, side=BOTTOM, pady=20)
 
@@ -58,6 +67,7 @@ def continue_game():
 #to generate the random number
 def generate_number():
     global score
+    submit_button_off()
     score_label.config(text=f"Score: {score}")
     global highscore
     if score > highscore:
