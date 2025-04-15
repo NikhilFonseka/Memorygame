@@ -22,6 +22,14 @@ def save_to_csv(templist):
         answer = csv.writer(excelence)
         answer.writerow([templist])
 
+def countdown(time_left):
+    if time_left > 0:
+        timer_label.config(text=f"Time left: {time_left}s")
+        root.after(1000, countdown, time_left - 1) 
+    else:
+        timer_label.config(text="")  
+        hide()  
+
 #game is over you restart
 def game_over():
     global score, templist, user_guess, number_amount
@@ -35,6 +43,7 @@ def game_over():
     user_guess = User_Guess.get()
     templist = ''.join(map(str, templist))
     save_to_csv(templist)
+    
 
 #bug fix user submit before number is visible
 def submit_button_on():
@@ -88,14 +97,16 @@ def generate_number():
     number.append(templist)
     show_number.config(text=f"{''.join(map(str, templist))}")
     show_number.pack(pady=100)
+
+    # Start the countdown based on the score
     if score >= 3:
-        root.after(6000, hide)
+        countdown(6)
     elif score >= 2:
-        root.after(4000, hide)
+        countdown(4)
     elif score >= 1:
-        root.after(3200, hide)
+        countdown(3)
     else:
-        root.after(2200, hide)
+        countdown(2)
 
 
 #checs if your number was right
@@ -196,7 +207,8 @@ frame3 = Frame(root,bg="black")
 
 #this shows you the number so you can remember it
 show_number = Label(frame3, text="",font=("helvetica", 30, "bold"),fg="#39FF14",bg="Black")
-
+timer_label = Label(frame3, text="", font=("helvetica", 16, "bold"), fg="red", bg="black")
+timer_label.pack(pady=10)
 #this is where the user guess it 
 User_Guess = Entry(frame3, font=("Arial", 20),validate="key",validatecommand=(validate_cmd, "%P") )
 #they can either click this or eneter
@@ -220,5 +232,4 @@ generate_button1.bind("<Leave>",nsgb)
 
 #end root/ tkinter 
 root=mainloop()
-
 
