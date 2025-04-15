@@ -98,7 +98,6 @@ def generate_number():
     show_number.config(text=f"{''.join(map(str, templist))}")
     show_number.pack(pady=100)
 
-    # Start the countdown based on the score
     if score >= 3:
         countdown(6)
     elif score >= 2:
