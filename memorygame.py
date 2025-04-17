@@ -12,16 +12,19 @@ templist=[]
 number = []
 num = None
 number_amount = 5
+
+#saves answer in csv file
 with open('excelence.csv', mode='w') as excel:
 
     write = csv.writer(excel)
     write.writerow(["Answer"])
+
 global user_guess
 def save_to_csv(templist):
     with open('excelence.csv', mode='a') as excelence:
         answer = csv.writer(excelence)
         answer.writerow([templist])
-
+#this is for the countdown timer
 def countdown(time_left):
     if time_left > 0:
         timer_label.config(text=f"Time left: {time_left}s")
@@ -35,7 +38,7 @@ def game_over():
     global score, templist, user_guess, number_amount
     submitbutton.pack_forget()
     User_Guess.pack_forget()
-    go.pack(pady=90)
+    go.pack(pady=60)
     score_label.pack()
     score = 0
     generate_button1.pack()
@@ -97,7 +100,7 @@ def generate_number():
     number.append(templist)
     show_number.config(text=f"{''.join(map(str, templist))}")
     show_number.pack(pady=100)
-
+#timer, changing as the number length increases
     if score >= 3:
         countdown(6)
     elif score >= 2:
@@ -192,7 +195,7 @@ header2.pack(side=TOP, pady=20)
 header = Label(frame2,text="Welcome to the memory game you will be shown a sequence of numbers, you have 5 seconds to remember it, and when the times runs out you have to type it into the box, Good Luck!",
     font=("helvetica", 12, "bold"), bg="black", fg="teal",wraplength=450)
 header.pack(pady=30)
-reward = Label(frame2,text="First person to reach 9 Wins, dont miss out on secret reward",
+reward = Label(frame2,text="First person to reach 9: dont miss out on secret reward",
     font=("helvetica", 10, "bold"), bg="black", fg="darkgreen", wraplength=450)
 reward.pack()
 #this button generates the randon number
@@ -207,7 +210,7 @@ frame3 = Frame(root,bg="black")
 #this shows you the number so you can remember it
 show_number = Label(frame3, text="",font=("helvetica", 30, "bold"),fg="#39FF14",bg="Black")
 timer_label = Label(frame3, text="", font=("helvetica", 16, "bold"), fg="red", bg="black")
-timer_label.pack(pady=10)
+timer_label.pack(pady=10, side=TOP)
 #this is where the user guess it 
 User_Guess = Entry(frame3, font=("Arial", 20),validate="key",validatecommand=(validate_cmd, "%P") )
 #they can either click this or eneter
