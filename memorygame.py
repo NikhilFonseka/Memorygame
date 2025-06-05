@@ -13,13 +13,14 @@ number = []
 num = None
 number_amount = 5
 
-#saves answer in csv file
+#clears the csv file when you open
 with open('excelence.csv', mode='w') as excel:
 
     write = csv.writer(excel)
     write.writerow(["Answer"])
 
 global user_guess
+#when the user gets an answer wrong this logs into a file excelence.csv so the user can check back
 def save_to_csv(templist):
     with open('excelence.csv', mode='a') as excelence:
         answer = csv.writer(excelence)
@@ -234,4 +235,3 @@ generate_button1.bind("<Leave>",nsgb)
 
 #end root/ tkinter 
 root=mainloop()
-
