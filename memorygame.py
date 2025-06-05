@@ -12,7 +12,6 @@ templist=[]
 number = []
 num = None
 number_amount = 5
-
 #clears the csv file when you open
 with open('excelence.csv', mode='w') as excel:
 
@@ -20,7 +19,9 @@ with open('excelence.csv', mode='w') as excel:
     write.writerow(["Answer"])
 
 global user_guess
-#when the user gets an answer wrong this logs into a file excelence.csv so the user can check back
+#when the user gets an answer wrong this logs into a file excelence.csv so the user can check back in retrospect, 
+#users can check back and see what numbers they are getting wrong, and find patterns in which numbers they are misremembering
+
 def save_to_csv(templist):
     with open('excelence.csv', mode='a') as excelence:
         answer = csv.writer(excelence)
@@ -37,15 +38,17 @@ def countdown(time_left):
 #game is over you restart
 def game_over():
     global score, templist, user_guess, number_amount
+    user_guess = User_Guess.get()
+    templist = ''.join(map(str, templist))
     submitbutton.pack_forget()
     User_Guess.pack_forget()
-    go.pack(pady=60)
+    go.config(text="Game over:" "\n" f"Correct answer was {templist}")
+    go.pack(pady=30)
     score_label.pack()
     score = 0
     generate_button1.pack()
     number_amount = 5
-    user_guess = User_Guess.get()
-    templist = ''.join(map(str, templist))
+    User_Guess.delete(0, END)
     save_to_csv(templist)
     
 
@@ -124,7 +127,6 @@ def check(event=None):
 
 
     else:#if you got it wrong
-        User_Guess.delete(0, END)
         game_over()
 #so that the user can only enter numbers into the entry
 def validate_input(new_text):
@@ -226,7 +228,7 @@ highscore_label = Label(frame3, text=f"High Score: {highscore}", font=("helvetic
 highscore_label.pack(side=TOP, pady=10)
 score_label.pack(side=TOP, pady=10)
 #game over
-go = Label(frame3, text="Game over", font=("helvetica", 25, "bold"), bg="black", fg="red")
+go = Label(frame3, text="Game over", font=("helvetica", 23, "bold"), bg="black", fg="red")
 
 #generate button and hover effect
 generate_button1 = Button(frame3, text="Restart", font=("helvetica", 16, "bold"), fg="White", bg="Gold", command=generate_number, padx=20, pady=10, activebackground="grey", activeforeground="black")
